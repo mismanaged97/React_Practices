@@ -1,4 +1,5 @@
 import './App.css'
+import Counter from './Components/Counter'
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
       {/* <CalculateFactorial></CalculateFactorial> */}
       {/* <FilterSearch></FilterSearch> */}
       {/* <GroceryStore></GroceryStore> */}
+      <Counter></Counter>
     </>
   )
 }
