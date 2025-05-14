@@ -1,12 +1,12 @@
 // create a component that renders a large list of sentences and includes an input field for filtering these item.
 // The goal is to use UseMemo to optimizing the filtering process, ensure the list is only re-calculated when necessary (eg :- when filter criteria changes)
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const words = ["hi", "there", "my", "name", "is", "to", "do", "random", "buy", "macbook", "filter", "s400", "defence", "system", "ensure", "react"];
 const TotalLines = 1000;
 const All_Words = [];
-for (let i = 0; i < TotalLines; i++) {
+for (let i = 0; i <= TotalLines; i++) {
     let sentence = "";
     for (let j = 0; j <= words.length - 5; j++) {
         sentence += words[Math.floor(Math.random() * words.length)];
@@ -16,18 +16,19 @@ for (let i = 0; i < TotalLines; i++) {
 }
 
 export default function FilterSearch() {
-    const [inputValue, setInputValue] = useState(All_Words);
-    const [words, setWords] = useState(All_Words);
+    const [sentence, setSentence] = useState(All_Words);
+    const [filter, setFilter] = useState("");
 
-    const filteredSentences = inputValue.filter(x => x.includes(words))
+    const filteredSentences = useMemo(() => {
+        return sentence.filter(x => x.includes(filter))
+    }, [filter, sentence])
 
     return (
         <>
-            <input type="text" placeholder="Enter words to do filter" onChange={(e) => { setInputValue(e.target.value) }}>{filteredSentences.map(x =>
-                <div>
-                    {x}
-                </div>
-            )}</input> <br></br>
+            <input type="text" placeholder="Enter some words....." onChange={(e) => { setFilter(e.target.value) }}></input> <br></br>
+            {filteredSentences.map(x => {
+                return <div>{x}</div>
+            })}
         </>
     )
 }
