@@ -1,5 +1,4 @@
 import './App.css'
-import GroceryStore from './Components/GroceryStore'
 
 function App() {
 
@@ -7,7 +6,7 @@ function App() {
     <>
       {/* <CalculateFactorial></CalculateFactorial> */}
       {/* <FilterSearch></FilterSearch> */}
-      <GroceryStore></GroceryStore>
+      {/* <GroceryStore></GroceryStore> */}
     </>
   )
 }
