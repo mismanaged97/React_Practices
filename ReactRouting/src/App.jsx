@@ -1,23 +1,34 @@
 //#region CONTEXT API
-import { useState } from "react"
+import { useContext, useState } from "react";
+import { CounterContext } from "../Context";
 
 export default function App() {
   const [count, setCount] = useState(0);
+
+  // wrap everything that wants to use the teleported value inside a provider
   return <div>
-    <Counter count={count}></Counter>
-    <Buttons setCounter={setCount} count={count}></Buttons>
+    <CounterContext.Provider value={count}>
+      <Counter setCount={setCount}></Counter>
+    </CounterContext.Provider>
   </div >
 }
 
-function Counter({ count }) {
+function Counter({ setCount }) {
   return <div>
-    <h1>
-      {count}
-    </h1>
+    <CountRenderer></CountRenderer>
+    <Buttons setCounter={setCount}></Buttons>
   </div>
 }
 
-function Buttons({ setCounter, count }) {
+function CountRenderer() {
+  const count = useContext(CounterContext);
+  return <div>
+    <h1> {count} </h1>
+  </div>
+}
+
+function Buttons({ setCounter }) {
+  const count = useContext(CounterContext);
   return <div>
     <button onClick={() => { setCounter(count + 1) }}>Increment</button>
     <button onClick={() => { setCounter(count - 1) }}>Decrement</button>
