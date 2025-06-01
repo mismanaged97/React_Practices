@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+//#region Context API :- It only resolves the problem of props drilling but by using this it automatically re-renders those components as well in which we haven't use Context API
+import { useContext, useState } from 'react'
 import './App.css'
+import { CountContext } from './Context'
 
-function App() {
+export default function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <CountContext.Provider value={count}>
+        <Count setCount={setCount}></Count>
+      </CountContext.Provider>
     </>
   )
 }
 
-export default App
+function Count({ setCount }) {
+  console.log("Count component re-renders")
+  return <div>
+    <CountRenderer></CountRenderer>
+    <Buttons setCount={setCount}></Buttons>
+  </div>
+}
+
+function CountRenderer() {
+  const count = useContext(CountContext);
+  return <div> <h2>
+    <b> {count} </b>
+  </h2 >
+  </div>
+}
+
+function Buttons({ setCount }) {
+  const count = useContext(CountContext)
+  return <div>
+    <button onClick={() => { setCount(count + 1) }}>Increment</button>
+    <button onClick={() => { setCount(count - 1) }}>Decrement</button>
+  </div>
+}
+//#endregion
