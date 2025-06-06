@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { networkAtom, jobAtom, messagingAtom, notificationAtom } from '../src/atoms';
+import { RecoilRoot, useRecoilValue } from 'recoil';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  return <RecoilRoot>
+    <MainApp></MainApp>
+  </RecoilRoot>
+}
 
+function MainApp() {
+  const networkValue = useRecoilValue(networkAtom);
+  const jobValue = useRecoilValue(jobAtom);
+  const messagingValue = useRecoilValue(messagingAtom);
+  const notificationValue = useRecoilValue(notificationAtom);
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <RecoilRoot>
+        <CustomButton name={"Home"} ></CustomButton> <br></br>
+        <CustomButton name={"My Network"} value={networkValue > 99 ? "99+" : networkValue}></CustomButton> <br></br>
+        <CustomButton name={"Jobs"} value={jobValue > 99 ? "99+" : jobValue}></CustomButton> <br></br>
+        <CustomButton name={"Messaging"} value={messagingValue > 99 ? "99+" : messagingValue}></CustomButton> <br></br>
+        <CustomButton name={"Notifications"} value={notificationValue > 99 ? "99+" : notificationValue}></CustomButton > <br></br>
+        <CustomButton name={"Me"}></CustomButton> <br></br>
+      </RecoilRoot>
     </>
   )
 }
 
-export default App
+function CustomButton({ name, value }) {
+  return <div>
+    <button>{name} {value ? value : ""}</button>
+  </div>
+}
