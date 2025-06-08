@@ -1,5 +1,5 @@
 import './App.css'
-import { networkAtom, jobAtom, messagingAtom, notificationAtom } from '../src/atoms';
+import { networkAtom, jobAtom, messagingAtom, notificationAtom, totalNotificationSelector } from '../src/atoms';
 import { RecoilRoot, useRecoilValue } from 'recoil';
 
 export default function App() {
@@ -13,6 +13,7 @@ function MainApp() {
   const jobValue = useRecoilValue(jobAtom);
   const messagingValue = useRecoilValue(messagingAtom);
   const notificationValue = useRecoilValue(notificationAtom);
+  const totalNotificationValue = useRecoilValue(totalNotificationSelector);
   return (
     <>
       <RecoilRoot>
@@ -21,7 +22,7 @@ function MainApp() {
         <CustomButton name={"Jobs"} value={jobValue > 99 ? "99+" : jobValue}></CustomButton> <br></br>
         <CustomButton name={"Messaging"} value={messagingValue > 99 ? "99+" : messagingValue}></CustomButton> <br></br>
         <CustomButton name={"Notifications"} value={notificationValue > 99 ? "99+" : notificationValue}></CustomButton > <br></br>
-        <CustomButton name={"Me"}></CustomButton> <br></br>
+        <CustomButton name={"Me"} value={totalNotificationValue}></CustomButton> <br></br>
       </RecoilRoot>
     </>
   )
