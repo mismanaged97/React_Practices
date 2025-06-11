@@ -1,6 +1,8 @@
 import './App.css'
 import { networkAtom, jobAtom, messagingAtom, notificationAtom, totalNotificationSelector } from '../src/atoms';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
+import { axios } from 'axios'
 
 export default function App() {
   return <RecoilRoot>
@@ -14,6 +16,19 @@ function MainApp() {
   const messagingValue = useRecoilValue(messagingAtom);
   const notificationValue = useRecoilValue(notificationAtom);
   const totalNotificationValue = useRecoilValue(totalNotificationSelector);
+  const [networkCount, setNetworkCount] = useRecoilState(notifications);
+  const totalNotificationCount = useRecoilValue(totalNotificationSelector);
+
+
+  useEffect(() => {
+    axios.get("https://sum-server.100xdevs.com/notifications").then(res => {
+      setNetworkCount(res.data);
+    })
+  }, [])
+
+
+
+
   return (
     <>
       <RecoilRoot>
