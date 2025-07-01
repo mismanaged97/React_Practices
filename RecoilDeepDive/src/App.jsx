@@ -1,50 +1,61 @@
-import './App.css'
-import { networkAtom, jobAtom, messagingAtom, notificationAtom, totalNotificationSelector } from '../src/atoms';
-import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
-import { axios } from 'axios'
+//#region Asynchronous Data Queries
 
-export default function App() {
-  return <RecoilRoot>
-    <MainApp></MainApp>
-  </RecoilRoot>
-}
+// import { RecoilRoot, useRecoilState } from "recoil"
+// import { CountryAtom } from "./atoms";
 
-function MainApp() {
-  const networkValue = useRecoilValue(networkAtom);
-  const jobValue = useRecoilValue(jobAtom);
-  const messagingValue = useRecoilValue(messagingAtom);
-  const notificationValue = useRecoilValue(notificationAtom);
-  const totalNotificationValue = useRecoilValue(totalNotificationSelector);
-  const [networkCount, setNetworkCount] = useRecoilState(notifications);
-  const totalNotificationCount = useRecoilValue(totalNotificationSelector);
+// export default function App(){
+//   return <RecoilRoot>
+//     <MainApp></MainApp>
+//   </RecoilRoot>
+// }
 
+// function MainApp(){
+//   const [countryCount, setCountryCount] = useRecoilState(CountryAtom);  
+//     return <div>
+//       <p>Country Name Related Details</p>
+//       <p>common property</p>
+//       <p>official property</p>
+//     </div>
+// }
+//#endregion
 
-  useEffect(() => {
-    axios.get("https://sum-server.100xdevs.com/notifications").then(res => {
-      setNetworkCount(res.data);
-    })
-  }, [])
+//#region Basics Recoil
 
+  // import './App.css'
+  // import { networkAtom, jobAtom, messagingAtom, notificationAtom, totalNotificationSelector } from '../src/atoms';
+  // import { RecoilRoot, useRecoilValue } from 'recoil';
 
-
-
-  return (
-    <>
-      <RecoilRoot>
-        <CustomButton name={"Home"} ></CustomButton> <br></br>
-        <CustomButton name={"My Network"} value={networkValue > 99 ? "99+" : networkValue}></CustomButton> <br></br>
-        <CustomButton name={"Jobs"} value={jobValue > 99 ? "99+" : jobValue}></CustomButton> <br></br>
-        <CustomButton name={"Messaging"} value={messagingValue > 99 ? "99+" : messagingValue}></CustomButton> <br></br>
-        <CustomButton name={"Notifications"} value={notificationValue > 99 ? "99+" : notificationValue}></CustomButton > <br></br>
-        <CustomButton name={"Me"} value={totalNotificationValue}></CustomButton> <br></br>
-      </RecoilRoot>
-    </>
-  )
-}
-
-function CustomButton({ name, value }) {
-  return <div>
-    <button>{name} {value ? value : ""}</button>
-  </div>
-}
+  // export default function App() {
+    //   return <RecoilRoot>
+    //     <MainApp></MainApp>
+    //   </RecoilRoot>
+    // }
+    
+    // function MainApp() {
+      //   const networkValue = useRecoilValue(networkAtom);
+      //   const jobValue = useRecoilValue(jobAtom);
+      //   const messagingValue = useRecoilValue(messagingAtom);
+      //   const notificationValue = useRecoilValue(notificationAtom);
+      //   const totalNotificationValue = useRecoilValue(totalNotificationSelector);
+      //   return (
+        //     <>
+        //       <RecoilRoot>
+        //         <CustomButton name={"Home"} ></CustomButton> <br></br>
+        //         <CustomButton name={"My Network"} value={networkValue > 99 ? "99+" : networkValue}></CustomButton> <br></br>
+        //         <CustomButton name={"Jobs"} value={jobValue > 99 ? "99+" : jobValue}></CustomButton> <br></br>
+        //         <CustomButton name={"Messaging"} value={messagingValue > 99 ? "99+" : messagingValue}></CustomButton> <br></br>
+        //         <CustomButton name={"Notifications"} value={notificationValue > 99 ? "99+" : notificationValue}></CustomButton > <br></br>
+        //         <CustomButton name={"Me"} value={totalNotificationValue}></CustomButton> <br></br>
+        //       </RecoilRoot>
+        //     </>
+        //   )
+        // }
+        
+        // function CustomButton({ name, value }) {
+          //   return <div>
+          //     <button>{name} {value ? value : ""}</button>
+          //   </div>
+          // }
+          
+          
+//#endregion
