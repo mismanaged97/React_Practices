@@ -1,3 +1,9 @@
+//#region Atom Family
+
+// Atom family and 2 other high level concepts of Recoil are pending
+
+//#endregion
+
 //#region Asynchronous Data Queries
 
 // import { RecoilRoot, useRecoilState } from "recoil"
