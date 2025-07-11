@@ -77,3 +77,52 @@ import './App.css'
 //     </div>
 //   }
 // }
+
+// Third custom hook :- Performance and Time based hooks
+// function useInterval(fn, timeout) {
+//   useEffect(() => {
+//     setInterval(() => {
+//       fn()
+//     }, timeout)
+//   }, [])
+// }
+// export default function App() {
+//   const [count, setCount] = useState(0);
+
+//   useInterval(() => {
+//     setCount(e => e + 1)
+//   }, 1000);
+//   return <div>
+//     Timer is at {count}
+//   </div>
+// }
+
+// 4th custom hook :- Debounce 
+// function useDebounce(value, timeout) {
+//   const [debouncedValue, setDebouncedValue] = useState(value);
+
+//   useEffect(() => {                           // by using this we will update the debounced value after every 1 sec
+//     let timeoutNumber = setTimeout(() => {
+//       setDebouncedValue(value)
+//     }, timeout);
+
+//     return () => {                          // by using this it will clear the old values in the input box and directly updated the Debouced value to the last stroke of key
+//       clearTimeout(timeoutNumber);
+//     }
+//   }, [value])
+//   return debouncedValue;
+// }
+
+// export default function Searchbar() {
+//   const [value, setValue] = useState("");
+//   const debouncedValue = useDebounce(value, 1000);
+
+//   // here by using this debounced value we can call the API
+
+//   return (
+//     <div>
+//       <p>Here is the Debounced Value {debouncedValue}</p>
+//       <input type='text' placeholder='Enter Text here .....' value={value} onChange={(e) => setValue(e.target.value)}></input>
+//     </div>
+//   )
+// }
